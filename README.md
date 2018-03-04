@@ -1,9 +1,9 @@
-<p align="center"><img src="https://i.imgur.com/W9h9Acj.png" title="View tutorial" alt="React, React Router, Redux and Redux Thunk" width="900"></p>
+<p align="center"><img src="https://i.imgur.com/W9h9Acj.png" title="View tutorial" alt="React, React Router, Redux and Redux Thunk" width="500"></p>
 
 [![Dependency Status](https://dependencyci.com/github/hendrikgaffo/create-react-app-redux-material/badge)](https://dependencyci.com/github/hendrikgaffo/create-react-app-redux-material)
 
+* Demo: [View on Firebase](https://cra-redux-material.firebaseapp.com/) 🔥 (if down: [View on BitBalloon](http://cra-redux-material.bitballoon.com/)) 🙌
 * Tutorial: [Getting started with create-react-app, Redux, React Router & Redux Thunk](https://medium.com/@notrab/getting-started-with-create-react-app-redux-react-router-redux-thunk-d6a19259f71f)
-* Example: [View on Firebase](https://cra-redux-material.firebasepp.com/) 🙌
 
 ## Installation
 
