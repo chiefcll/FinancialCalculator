@@ -1,7 +1,7 @@
 <p align="center"><img src="https://i.imgur.com/W9h9Acj.png" title="View tutorial" alt="React, React Router, Redux and Redux Thunk" width="500"></p>
 
 
-<img src="https://david-dm.org/hendrikgaffo/create-react-app-redux-material.svg" />
+<a href="https://david-dm.org/hendrikgaffo/create-react-app-redux-material"><img src="https://david-dm.org/hendrikgaffo/create-react-app-redux-material.svg" /></a>
 
 
 * Demo: [View on Firebase](https://cra-redux-material.firebaseapp.com/) 🔥 (if down: [View on BitBalloon](http://cra-redux-material.bitballoon.com/)) 🙌
