@@ -1,5 +1,5 @@
 {
-  "name": "create-react-app-redux",
+  "name": "create-react-app-redux-material",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -13,9 +13,8 @@
     "react-scripts": "^1.0.17"
   },
   "dependencies": {
-    "bloomer": "0.6.3",
-    "bulma": "0.6.2",
     "firebase": "4.10.1",
+    "firebase-functions": "0.8.1",
     "material-ui": "1.0.0-beta.35",
     "material-ui-icons": "1.0.0-beta.35",
     "prop-types": "15.6.1",
