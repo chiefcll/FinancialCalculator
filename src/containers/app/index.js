@@ -1,20 +1,24 @@
 import React from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
+import blue from 'material-ui/colors/blue';
 import Home from '../home';
 import About from '../about';
+import ResponsiveDrawer from '../../components/organisms/drawer/drawer';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: blue
+  }
+});
 
 const App = () => (
-  <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header>
-
-    <main>
+  <MuiThemeProvider theme={theme}>
+    <ResponsiveDrawer>
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
-    </main>
-  </div>
+    </ResponsiveDrawer>
+  </MuiThemeProvider>
 );
 
 export default App;
