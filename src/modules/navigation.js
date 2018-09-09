@@ -9,6 +9,10 @@ const initialState = {
     {
       title: 'About Us',
       route: '/about-us'
+    },
+    {
+      title: 'Mortgage Calculator',
+      route: '/mortgage'
     }
   ]
 };

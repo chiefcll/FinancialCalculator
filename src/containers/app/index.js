@@ -4,6 +4,7 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import blue from 'material-ui/colors/blue';
 import Home from '../home';
 import About from '../about';
+import Mortgage from '../mortgage';
 import ResponsiveDrawer from '../../components/organisms/drawer/drawer';
 
 const theme = createMuiTheme({
@@ -17,6 +18,7 @@ const App = () => (
     <ResponsiveDrawer>
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
+      <Route exact path="/mortgage" component={Mortgage} />
     </ResponsiveDrawer>
   </MuiThemeProvider>
 );
