@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'material-ui/styles';
-import Drawer from 'material-ui/Drawer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
-import Hidden from 'material-ui/Hidden';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
-import InboxIcon from 'material-ui-icons/Inbox';
-import Divider from 'material-ui/Divider';
-import MenuIcon from 'material-ui-icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
+import Divider from '@material-ui/core/Divider';
+import MenuIcon from '@material-ui/icons/Menu';
 import { push } from 'react-router-redux';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -20,13 +22,12 @@ const drawerWidth = 240;
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    height: 430,
+    height: 440,
     zIndex: 1,
     overflow: 'hidden',
     position: 'relative',
     display: 'flex',
-    width: '100%',
-    minHeight: '100vh'
+    width: '100%'
   },
   appBar: {
     position: 'absolute',
@@ -55,37 +56,17 @@ const styles = theme => ({
 });
 
 class ResponsiveDrawer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      mobileOpen: false,
-      pageTitle: 'Home'
-    };
-  }
+  state = {
+    pageTitle: 'Home',
+    mobileOpen: false
+  };
 
   handleDrawerToggle = () => {
-    this.setState({ mobileOpen: !this.state.mobileOpen });
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
   render() {
     const { classes, theme, navigation } = this.props;
-
-    const navbar = (
-      <AppBar className={classes.appBar}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={this.handleDrawerToggle}
-            className={classes.navIconHide}>
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="title" color="inherit" noWrap>
-            {this.state.pageTitle}
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    );
 
     const drawer = (
       <div>
@@ -100,9 +81,6 @@ class ResponsiveDrawer extends React.Component {
                 this.props.changePage(item.route);
                 this.setState({ pageTitle: item.title });
               }}>
-              <ListItemIcon>
-                <InboxIcon />
-              </ListItemIcon>
               <ListItemText primary={item.title} />
             </ListItem>
           ))}
@@ -113,7 +91,20 @@ class ResponsiveDrawer extends React.Component {
 
     return (
       <div className={classes.root}>
-        {navbar}
+        <AppBar className={classes.appBar}>
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}>
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              {this.state.pageTitle}
+            </Typography>
+          </Toolbar>
+        </AppBar>
         <Hidden mdUp>
           <Drawer
             variant="temporary"
@@ -168,7 +159,10 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-export default connect(mapStateToProps, mapDispatchToProps)(
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(
   withStyles(styles, {
     withTheme: true
   })(ResponsiveDrawer)
