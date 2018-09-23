@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import calculatePayment from './calculatePayment';
 
 const styles = theme => ({
   button: {
@@ -14,9 +15,12 @@ const styles = theme => ({
 
 /*
   Todo (HW):
-  1. Why is it not setting initial payment value
-  2. Style to make input boxes vertical
-  3. Fix payment field label and be readonly.
+  1. Eslint setup
+  2. Use Mortgage Calculator NPM package
+  3. Set Proptypes
+  4. Research props vs state
+  5. ES6 destructuring + Arrow Functions (spread operator)
+  6. What is our next calculator???
 
   Understand how React sets default state
 
@@ -26,18 +30,16 @@ const styles = theme => ({
 
   Lay the foundations for Redux...
   */
-
 class Mortgage extends React.Component {
-  state = {
-    amount: 200000,
-    term: 30,
-    apr: 5
-  };
-
   constructor(props) {
     super(props);
+    this.state = {
+      amount: 200000,
+      term: 30,
+      apr: 5
+    };
     this.handleChange = this.handleChange.bind(this);
-    this.setState({ payment: this.calculatePayment(this.state) });
+    this.state.payment = calculatePayment(this.state);
   }
 
   handleChange = name => event => {
@@ -45,22 +47,9 @@ class Mortgage extends React.Component {
       [name]: event.target.value
     });
 
-    state.payment = this.calculatePayment(state);
+    state.payment = calculatePayment(state);
 
     this.setState(state);
-  };
-
-  calculatePayment = state => {
-    let { amount, apr, term, payment } = state;
-
-    apr /= 1200;
-    term *= 12;
-    payment =
-      (amount * (apr * Math.pow(1 + apr, term))) /
-      (Math.pow(1 + apr, term) - 1);
-    payment = '$' + payment.toFixed(2);
-
-    return payment;
   };
 
   render() {
@@ -107,6 +96,8 @@ class Mortgage extends React.Component {
             value={this.state.payment}
             className={classes.textField}
             margin="normal"
+            InputProps={{ readOnly: true }}
+            InputLabelProps={{ shrink: true }}
           />
         </form>
       </div>
