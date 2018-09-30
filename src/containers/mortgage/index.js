@@ -32,12 +32,12 @@ class Mortgage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 200000,
-      term: 30,
-      apr: 5
+      amount: this.props.amount,
+      term: this.props.term,
+      apr: this.props.apr
     };
     this.handleChange = this.handleChange.bind(this);
-    this.state.payment = calculatePayment(this.state);
+    this.setState.payment = calculatePayment(this.state);
   }
 
   handleChange = name => event => {
