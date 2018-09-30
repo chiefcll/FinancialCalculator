@@ -7,11 +7,11 @@ import amortize from 'amortize';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   input: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
 /*
@@ -22,10 +22,10 @@ const styles = theme => ({
 class Mortgage extends React.Component {
   constructor(props) {
     super(props);
-    let loan = {
+    const loan = {
       amount: 200000,
       termMonths: 360,
-      rate: 5
+      rate: 5,
     };
     this.handleChange = this.handleChange.bind(this);
 
@@ -33,27 +33,27 @@ class Mortgage extends React.Component {
   }
 
   calculate({ amount, termMonths, rate }) {
-    let loan = Object.assign(
+    const loan = Object.assign(
       {},
       {
         amount,
         termMonths,
         rate,
         totalTerm: termMonths,
-        amortizeTerm: termMonths
-      }
+        amortizeTerm: termMonths,
+      },
     );
 
     (loan.payment = LoanCalc.paymentCalc(loan)),
-      (loan.amortization = amortize(loan));
+    (loan.amortization = amortize(loan));
 
     return loan;
   }
 
   handleChange(name) {
-    return event => {
-      let loan = Object.assign({}, this.state, {
-        [name]: event.target.value
+    return (event) => {
+      const loan = Object.assign({}, this.state, {
+        [name]: event.target.value,
       });
 
       this.setState(this.calculate(loan));

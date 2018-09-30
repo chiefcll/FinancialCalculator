@@ -4,17 +4,17 @@ const initialState = {
   navigation: [
     {
       title: 'Home',
-      route: '/'
+      route: '/',
     },
     {
       title: 'About Us',
-      route: '/about-us'
+      route: '/about-us',
     },
     {
       title: 'Mortgage Calculator',
-      route: '/mortgage'
-    }
-  ]
+      route: '/mortgage',
+    },
+  ],
 };
 
 export default (state = initialState, action) => {
@@ -24,25 +24,25 @@ export default (state = initialState, action) => {
         navigation: [
           {
             title: 'Dashboard',
-            route: '/'
+            route: '/',
           },
           {
             title: 'Projekte',
-            route: '/'
+            route: '/',
           },
           {
             title: 'Einstellungen',
-            route: '/about-us'
-          }
-        ]
+            route: '/about-us',
+          },
+        ],
       };
     default:
       return state;
   }
 };
 
-export const user = () => dispatch => {
+export const user = () => (dispatch) => {
   dispatch({
-    type: USER
+    type: USER,
   });
 };
