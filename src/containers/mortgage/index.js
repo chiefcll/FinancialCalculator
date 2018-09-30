@@ -1,18 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import calculatePayment from './calculatePayment';
 
 const styles = theme => ({
-  button: {
-    margin: theme.spacing.unit
-  },
   input: {
     display: 'none'
   }
 });
-
 /*
   Todo (HW):
   1. Eslint setup
@@ -30,6 +27,7 @@ const styles = theme => ({
 
   Lay the foundations for Redux...
   */
+
 class Mortgage extends React.Component {
   constructor(props) {
     super(props);
@@ -69,6 +67,7 @@ class Mortgage extends React.Component {
             onChange={this.handleChange('amount')}
             margin="normal"
           />
+          <br />
           <TextField
             required
             id="apr"
@@ -79,6 +78,7 @@ class Mortgage extends React.Component {
             className={classes.textField}
             margin="normal"
           />
+          <br />
           <TextField
             required
             id="term"
@@ -89,7 +89,7 @@ class Mortgage extends React.Component {
             className={classes.textField}
             margin="normal"
           />
-
+          <br />
           <TextField
             id="payment"
             label="payment"
