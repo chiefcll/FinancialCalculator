@@ -44,7 +44,7 @@
   "homepage": "https://cra-redux-router-thunk.herokuapp.com",
   "lint-staged": {
     "*.{js}": [
-      "eslint src/**/*.js --fix",
+      "eslint --fix",
       "git add"
     ]
   }

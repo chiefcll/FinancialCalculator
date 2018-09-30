@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import LoanCalc from 'loan-calc';
 import amortize from 'amortize';
+import AmortizationChart from './AmortizationChart';
 
 const styles = theme => ({
   button: {
@@ -44,8 +45,8 @@ class Mortgage extends React.Component {
       },
     );
 
-    (loan.payment = LoanCalc.paymentCalc(loan)),
-    (loan.amortization = amortize(loan));
+    loan.payment = LoanCalc.paymentCalc(loan);
+    loan.amortization = amortize(loan);
 
     return loan;
   }
@@ -107,6 +108,8 @@ class Mortgage extends React.Component {
             InputLabelProps={{ shrink: true }}
           />
         </form>
+
+        <AmortizationChart />
       </div>
     );
   }
