@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import calculatePayment from './calculatePayment';
+import LoanCalc from 'loan-calc';
+import amortize from 'amortize';
 
 const styles = theme => ({
   button: {
@@ -15,42 +16,49 @@ const styles = theme => ({
 
 /*
   Todo (HW):
-  1. Eslint setup
-  2. Use Mortgage Calculator NPM package
-  3. Set Proptypes
-  4. Research props vs state
-  5. ES6 destructuring + Arrow Functions (spread operator)
-  6. What is our next calculator???
+  Print out amortization table. :-)
 
-  Understand how React sets default state
-
-  Next Week
-
-  Add Calculate Button to update payment
-
-  Lay the foundations for Redux...
   */
 class Mortgage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
+    let loan = {
       amount: 200000,
-      term: 30,
-      apr: 5
+      termMonths: 360,
+      rate: 5
     };
     this.handleChange = this.handleChange.bind(this);
-    this.state.payment = calculatePayment(this.state);
+
+    this.state = this.calculate(loan);
   }
 
-  handleChange = name => event => {
-    let state = Object.assign({}, this.state, {
-      [name]: event.target.value
-    });
+  calculate({ amount, termMonths, rate }) {
+    let loan = Object.assign(
+      {},
+      {
+        amount,
+        termMonths,
+        rate,
+        totalTerm: termMonths,
+        amortizeTerm: termMonths
+      }
+    );
 
-    state.payment = calculatePayment(state);
+    (loan.payment = LoanCalc.paymentCalc(loan)),
+      (loan.amortization = amortize(loan));
 
-    this.setState(state);
-  };
+    return loan;
+  }
+
+  handleChange(name) {
+    return event => {
+      let loan = Object.assign({}, this.state, {
+        [name]: event.target.value
+      });
+
+      this.setState(this.calculate(loan));
+    };
+  }
 
   render() {
     const { classes = {} } = this.props;
@@ -71,25 +79,24 @@ class Mortgage extends React.Component {
           />
           <TextField
             required
-            id="apr"
-            label="apr"
-            onChange={this.handleChange('apr')}
-            value={this.state.apr}
+            id="rate"
+            label="rate"
+            onChange={this.handleChange('rate')}
+            value={this.state.rate}
             defaultValue="5"
             className={classes.textField}
             margin="normal"
           />
           <TextField
             required
-            id="term"
-            label="term"
-            onChange={this.handleChange('term')}
-            value={this.state.term}
+            id="termMonths"
+            label="termMonths"
+            onChange={this.handleChange('termMonths')}
+            value={this.state.termMonths}
             defaultValue="30"
             className={classes.textField}
             margin="normal"
           />
-
           <TextField
             id="payment"
             label="payment"
