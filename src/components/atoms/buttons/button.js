@@ -5,14 +5,14 @@ import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing.unit,
   },
   input: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 
-const Btn = props => {
+const Btn = (props) => {
   const { classes } = props;
   return (
     <Button
@@ -31,7 +31,7 @@ Btn.defaultProps = {
   color: 'primary',
   disabled: false,
   onClick: {},
-  title: 'Title'
+  title: 'Title',
 };
 
 Btn.propTypes = {
@@ -40,7 +40,7 @@ Btn.propTypes = {
   disabled: PropTypes.bool,
   variant: PropTypes.string,
   color: PropTypes.string,
-  classes: PropTypes.objectOf(PropTypes.string).isRequired
+  classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default withStyles(styles)(Btn);

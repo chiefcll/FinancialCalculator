@@ -9,8 +9,8 @@ import ResponsiveDrawer from '../../components/organisms/drawer/drawer';
 
 const theme = createMuiTheme({
   palette: {
-    primary: blue
-  }
+    primary: blue,
+  },
 });
 
 const App = () => (

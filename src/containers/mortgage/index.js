@@ -3,52 +3,64 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import calculatePayment from './calculatePayment';
+import LoanCalc from 'loan-calc';
+import amortize from 'amortize';
+import AmortizationChart from './AmortizationChart';
 
 const styles = theme => ({
+  button: {
+    margin: theme.spacing.unit,
+  },
   input: {
-    display: 'none'
-  }
+    display: 'none',
+  },
 });
 /*
   Todo (HW):
-  1. Eslint setup
-  2. Use Mortgage Calculator NPM package
-  3. Set Proptypes
-  4. Research props vs state
-  5. ES6 destructuring + Arrow Functions (spread operator)
-  6. What is our next calculator???
+  Print out amortization table. :-)
 
-  Understand how React sets default state
-
-  Next Week
-
-  Add Calculate Button to update payment
-
-  Lay the foundations for Redux...
   */
 
 class Mortgage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      amount: this.props.amount,
-      term: this.props.term,
-      apr: this.props.apr
+    const loan = {
+      amount: 200000,
+      termMonths: 360,
+      rate: 5,
     };
     this.handleChange = this.handleChange.bind(this);
-    this.setState.payment = calculatePayment(this.state);
+
+    this.state = this.calculate(loan);
   }
 
-  handleChange = name => event => {
-    let state = Object.assign({}, this.state, {
-      [name]: event.target.value
-    });
+  calculate({ amount, termMonths, rate }) {
+    const loan = Object.assign(
+      {},
+      {
+        amount,
+        termMonths,
+        rate,
+        totalTerm: termMonths,
+        amortizeTerm: termMonths,
+      },
+    );
 
-    state.payment = calculatePayment(state);
+    loan.payment = LoanCalc.paymentCalc(loan);
+    loan.amortization = amortize(loan);
 
-    this.setState(state);
-  };
+    return loan;
+  }
+
+  handleChange(name) {
+    return (event) => {
+      const loan = Object.assign({}, this.state, {
+        [name]: event.target.value,
+      });
+
+      this.setState(this.calculate(loan));
+    };
+  }
 
   render() {
     const { classes = {} } = this.props;
@@ -70,10 +82,10 @@ class Mortgage extends React.Component {
           <br />
           <TextField
             required
-            id="apr"
-            label="apr"
-            onChange={this.handleChange('apr')}
-            value={this.state.apr}
+            id="rate"
+            label="rate"
+            onChange={this.handleChange('rate')}
+            value={this.state.rate}
             defaultValue="5"
             className={classes.textField}
             margin="normal"
@@ -81,15 +93,14 @@ class Mortgage extends React.Component {
           <br />
           <TextField
             required
-            id="term"
-            label="term"
-            onChange={this.handleChange('term')}
-            value={this.state.term}
+            id="termMonths"
+            label="termMonths"
+            onChange={this.handleChange('termMonths')}
+            value={this.state.termMonths}
             defaultValue="30"
             className={classes.textField}
             margin="normal"
           />
-          <br />
           <TextField
             id="payment"
             label="payment"
@@ -100,6 +111,8 @@ class Mortgage extends React.Component {
             InputLabelProps={{ shrink: true }}
           />
         </form>
+
+        <AmortizationChart />
       </div>
     );
   }

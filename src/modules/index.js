@@ -6,5 +6,5 @@ import navigation from './navigation';
 export default combineReducers({
   router: routerReducer,
   counter,
-  navigation
+  navigation,
 });
