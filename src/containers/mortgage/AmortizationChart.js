@@ -3,18 +3,18 @@ import React from 'react';
 class AmortizationChart extends React.Component {
     render() {
         // ES6: Arrow function shorthand when function consists of single line return statement
-        let items = this.props.data.map((year, index) =>
+        let items = this.props.data.map(({principalY, balance, interestY}, index) =>
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td className="currency principal">{Math.round(year.principalY).toLocaleString()}</td>
+                <td className="currency principal">{Math.round(principalY).toLocaleString()}</td>
                 <td className="stretch">
                     <div className="flex">
-                        <div className="bar principal" style={{flex: year.principalY, WebkitFlex: year.principalY}}></div>
-                        <div className="bar interest" style={{flex: year.interestY, WebkitFlex: year.interestY}}></div>
+                        <div className="bar principal" style={{flex: principalY, WebkitFlex: principalY}}></div>
+                        <div className="bar interest" style={{flex: interestY, WebkitFlex: interestY}}></div>
                     </div>
                 </td>
-                <td className="currency interest">{Math.round(year.interestY).toLocaleString()}</td>
-                <td className="currency">{Math.round(year.balance).toLocaleString()}</td>
+                <td className="currency interest">{Math.round(interestY).toLocaleString()}</td>
+                <td className="currency">{Math.round(balance).toLocaleString()}</td>
             </tr>
         );
         return (
