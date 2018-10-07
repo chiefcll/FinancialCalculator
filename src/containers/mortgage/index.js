@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import LoanCalc from 'loan-calc';
-import amortize from 'amortize';
+//import LoanCalc from 'loan-calc';
+//import amortize  from '/amortize';
 import AmortizationChart from './AmortizationChart';
+
+
 
 const styles = theme => ({
   button: {
@@ -19,7 +21,7 @@ const styles = theme => ({
   Todo (HW):
   Print out amortization table. :-)
 
-  */
+  */ 
 
 class Mortgage extends React.Component {
   constructor(props) {
@@ -28,9 +30,9 @@ class Mortgage extends React.Component {
       amount: 200000,
       termMonths: 360,
       rate: 5,
+
     };
     this.handleChange = this.handleChange.bind(this);
-
     this.state = this.calculate(loan);
   }
 
@@ -46,8 +48,11 @@ class Mortgage extends React.Component {
       },
     );
 
-    loan.payment = LoanCalc.paymentCalc(loan);
-    loan.amortization = amortize(loan);
+    loan.payment = 1073.64;
+    //LoanCalc.calculate(loan);
+
+ 
+    //loan.amortization = amortize(loan);
 
     return loan;
   }
@@ -64,6 +69,11 @@ class Mortgage extends React.Component {
 
   render() {
     const { classes = {} } = this.props;
+    const data = [
+      {balance: 1000, interestY: 10, principalY: 100},
+      {balance: 2000, interestY: 20, principalY: 200}
+    ];
+
     return (
       <div>
         <p>Mortgage Calculator</p>
@@ -112,9 +122,12 @@ class Mortgage extends React.Component {
           />
         </form>
 
-        <AmortizationChart />
+        <AmortizationChart data={data}/>
       </div>
     );
+
+
+    
   }
 }
 
