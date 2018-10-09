@@ -19,7 +19,9 @@
   "dependencies": {
     "@material-ui/core": "^3.0.3",
     "@material-ui/icons": "^3.0.1",
+    "amortization": "^1.1.1",
     "amortize": "^1.1.0",
+    "financejs": "^4.1.0",
     "firebase": "5.4.2",
     "loan-calc": "^0.2.1",
     "prop-types": "15.6.2",

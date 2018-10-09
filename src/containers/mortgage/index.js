@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import LoanCalc from 'loan-calc';
-import amortize from 'amortize';
+import Finance from 'financejs';
+import {amortizationSchedule} from 'amortization';
 import AmortizationChart from './AmortizationChart';
 
 const styles = theme => ({
@@ -28,25 +28,25 @@ class Mortgage extends React.Component {
       termMonths: 360,
       rate: 5,
     };
+    this.finance = new Finance();
     this.handleChange = this.handleChange.bind(this);
 
     this.state = this.calculate(loan);
   }
 
   calculate({ amount, termMonths, rate }) {
-    const loan = Object.assign(
-      {},
-      {
-        amount,
-        termMonths,
-        rate,
-        totalTerm: termMonths,
-        amortizeTerm: termMonths,
-      },
-    );
+    const loan = {
+      amount,
+      termMonths,
+      rate,
+      totalTerm: termMonths,
+      amortizeTerm: termMonths,
+    };
 
-    loan.payment = LoanCalc.paymentCalc(loan);
-    loan.amortization = amortize(loan);
+    loan.payment = this.finance.AM(amount, rate, termMonths, 1);
+
+    loan.amortization = amortizationSchedule(amount, termMonths / 12, rate);
+
 
     return loan;
   }
@@ -109,7 +109,7 @@ class Mortgage extends React.Component {
           />
         </form>
 
-        <AmortizationChart />
+        <AmortizationChart data={this.state.amortization} />
       </div>
     );
   }
