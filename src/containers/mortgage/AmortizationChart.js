@@ -12,8 +12,8 @@ class AmortizationChart extends React.Component {
             <tr key={index}>
                 <td>{index + 1}</td>
                 <td className={classNames(styles.currency, styles.principal)}>{Math.round(month.principalPaymentRounded).toLocaleString()}</td>
-                <td className="currency interest">{Math.round(month.interestPaymentRounded).toLocaleString()}</td>
-                <td className="currency">{Math.round(month.principalBalanceRounded).toLocaleString()}</td>
+                <td className={classNames(styles.currency, styles.interest)}>{Math.round(month.interestPaymentRounded).toLocaleString()}</td>
+                <td className={classNames(styles.currency, styles.balance)}>{Math.round(month.principalBalanceRounded).toLocaleString()}</td>
             </tr>
         );
         return (
@@ -21,9 +21,9 @@ class AmortizationChart extends React.Component {
                 <thead>
                 <tr>
                     <th>Year</th>
-                    <th className="principal">Principal</th>
-                    <th className="interest">Interest</th>
-                    <th>Balance</th>
+                    <th className={classNames(styles.principal)}>Principal</th>
+                    <th className={classNames(styles.interest)}>Interest</th>
+                    <th className={classNames(styles.balance)}>Balance</th>
                 </tr>
                 </thead>
                 <tbody>{items}</tbody>
