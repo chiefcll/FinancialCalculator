@@ -1,5 +1,6 @@
 import React from 'react';
-import styles from './amortization.css';
+import classNames from 'classnames';
+import styles from './amortization.module.css';
 /*
 * We need to style this and pull the CSS out from global
 * stylesheet
@@ -10,7 +11,7 @@ class AmortizationChart extends React.Component {
         let items = this.props.data.map((month, index) =>
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td className="{styles.currency styles.principal}">{Math.round(month.principalPaymentRounded).toLocaleString()}</td>
+                <td className={classNames(styles.currency, styles.principal)}>{Math.round(month.principalPaymentRounded).toLocaleString()}</td>
                 <td className="currency interest">{Math.round(month.interestPaymentRounded).toLocaleString()}</td>
                 <td className="currency">{Math.round(month.principalBalanceRounded).toLocaleString()}</td>
             </tr>
